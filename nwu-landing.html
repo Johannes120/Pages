@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NWU – Application Submitted</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --nwu-purple:   #6b0f8e;
+      --nwu-purple-d: #4a0a64;
+      --nwu-purple-l: #8c2dae;
+      --accent:       #1976d2;
+      --accent-hover: #1255a1;
+      --green:        #1a7f3c;
+      --green-bg:     #eaf7ee;
+      --green-border: #a8ddb9;
+      --text-main:    #1a1a2e;
+      --text-muted:   #555;
+      --border:       #e0e0e0;
+      --bg:           #f5f4f8;
+      --card-bg:      #ffffff;
+      --radius:       10px;
+      --shadow:       0 4px 28px rgba(107,15,142,.13);
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--bg);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      color: var(--text-main);
+    }
+
+    /* ── HEADER ─────────────────────────────────────── */
+    header {
+      background: linear-gradient(135deg, var(--nwu-purple-d) 0%, var(--nwu-purple) 60%, var(--nwu-purple-l) 100%);
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+    }
+
+    .header-left { display: flex; align-items: center; gap: 16px; }
+
+    .logo-mark { width: 52px; height: 52px; flex-shrink: 0; }
+
+    .logo-text {
+      color: #fff;
+      font-size: 1.9rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    .logo-registered { font-size: 0.6rem; vertical-align: super; }
+
+    .header-user {
+      color: rgba(255,255,255,0.88);
+      font-size: 0.85rem;
+      text-align: right;
+      line-height: 1.5;
+    }
+
+    .header-user strong { color: #fff; display: block; font-size: 0.95rem; }
+
+    /* ── MAIN ────────────────────────────────────────── */
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 52px 16px 40px;
+    }
+
+    .wrapper {
+      width: 100%;
+      max-width: 560px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* ── SUCCESS CARD ────────────────────────────────── */
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 44px 40px 40px;
+      border-top: 4px solid var(--nwu-purple);
+      animation: popIn 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+      text-align: center;
+    }
+
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.94) translateY(18px); }
+      to   { opacity: 1; transform: scale(1)    translateY(0);    }
+    }
+
+    /* Animated tick circle */
+    .tick-wrap {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--green-bg);
+      border: 3px solid var(--green-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      animation: scaleIn 0.5s 0.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    @keyframes scaleIn {
+      from { transform: scale(0); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
+    }
+
+    .tick-wrap svg {
+      width: 40px;
+      height: 40px;
+    }
+
+    .tick-path {
+      stroke-dasharray: 50;
+      stroke-dashoffset: 50;
+      animation: drawTick 0.45s 0.55s ease forwards;
+    }
+
+    @keyframes drawTick {
+      to { stroke-dashoffset: 0; }
+    }
+
+    .card h1 {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--nwu-purple-d);
+      margin-bottom: 10px;
+      line-height: 1.35;
+    }
+
+    .card h1 span {
+      color: var(--nwu-purple);
+    }
+
+    .card .message {
+      font-size: 0.97rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .card .message strong {
+      color: var(--text-main);
+    }
+
+    /* ── INFO STRIP ──────────────────────────────────── */
+    .info-strip {
+      background: var(--green-bg);
+      border: 1.5px solid var(--green-border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      text-align: left;
+      font-size: 0.88rem;
+      color: var(--green);
+      line-height: 1.6;
+    }
+
+    .info-strip .icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 1px; }
+
+    /* ── DETAILS TABLE ───────────────────────────────── */
+    .details {
+      background: #faf9fc;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .details-title {
+      background: var(--nwu-purple-d);
+      color: #fff;
+      padding: 12px 20px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .details-row {
+      display: flex;
+      padding: 13px 20px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+      gap: 12px;
+    }
+
+    .details-row:last-child { border-bottom: none; }
+
+    .details-row dt {
+      color: var(--text-muted);
+      font-weight: 600;
+      min-width: 140px;
+      flex-shrink: 0;
+    }
+
+    .details-row dd { color: var(--text-main); }
+
+    /* ── ACTIONS ─────────────────────────────────────── */
+    .actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 12px 30px;
+      border-radius: var(--radius);
+      font-size: 0.93rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+      text-decoration: none;
+      display: inline-block;
+      
+    }
+
+    .btn:active { transform: scale(0.97); }
+
+    .btn-primary {
+      background: var(--nwu-purple);
+      color: #fff;
+      box-shadow: 0 2px 10px rgba(107,15,142,.25);
+    }
+
+    .btn-primary:hover {
+      background: var(--nwu-purple-d);
+      box-shadow: 0 4px 16px rgba(107,15,142,.35);
+    }
+
+    .btn-outline {
+      background: #fff;
+      color: var(--text-main);
+      border: 1.5px solid var(--border);
+    }
+
+    .btn-outline:hover { background: #f3f0f7; }
+
+    /* ── FOOTER ──────────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 18px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      border-top: 1px solid #e0e0e0;
+    }
+
+    /* ── NO SESSION (guard) ──────────────────────────── */
+    .guard-msg {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+    }
+
+    .guard-msg h2 { color: var(--nwu-purple-d); margin-bottom: 12px; }
+
+    @media (max-width: 480px) {
+      .card { padding: 32px 20px 28px; }
+      .details-row { flex-direction: column; gap: 2px; }
+      .details-row dt { min-width: unset; }
+      header { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .header-user { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── HEADER ──────────────────────────────────────── -->
+  <header>
+    <div class="header-left">
+      <svg class="logo-mark" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="28" cy="28" r="26" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
+        <path d="M10 16 Q10 36 22 36 Q34 36 34 28 Q34 20 26 20 Q20 20 20 26 Q20 32 26 32"
+              fill="none" stroke="white" stroke-width="4" stroke-linecap="round"/>
+        <path d="M22 20 Q22 40 34 40 Q46 40 46 28"
+              fill="none" stroke="white" stroke-width="4" stroke-linecap="round" opacity="0.75"/>
+      </svg>
+      <div class="logo-text">NWU<span class="logo-registered">®</span></div>
+    </div>
+    <div class="header-user" id="headerUser"></div>
+  </header>
+
+  <!-- ── MAIN ────────────────────────────────────────── -->
+  <main>
+    <div class="wrapper" id="pageContent">
+      <!-- Injected by JS -->
+    </div>
+  </main>
+
+  <!-- ── FOOTER ──────────────────────────────────────── -->
+  <footer>
+    &copy; 2025 North-West University. All rights reserved.
+  </footer>
+
+  <script>
+    const sessionRaw = localStorage.getItem('nwu_session');
+    const content    = document.getElementById('pageContent');
+    const headerUser = document.getElementById('headerUser');
+
+    if (!sessionRaw) {
+      // Guard: no session — show redirect message
+      content.innerHTML = `
+        <div class="guard-msg">
+          <h2>Session not found</h2>
+          <p>Please <a href="nwu-login.html" style="color:var(--accent)">log in</a> to access this page.</p>
+        </div>`;
+    } else {
+      const session = JSON.parse(sessionRaw);
+      const loginDate = new Date(session.loginTime);
+      const formattedDate = loginDate.toLocaleDateString('en-ZA', {
+        day: '2-digit', month: 'long', year: 'numeric'
+      });
+      const formattedTime = loginDate.toLocaleTimeString('en-ZA', {
+        hour: '2-digit', minute: '2-digit'
+      });
+
+      // Header greeting
+      headerUser.innerHTML = `
+        <strong>Welcome, ${session.firstName}</strong>
+        Student No: ${session.studentNumber}`;
+
+      // Page content
+      content.innerHTML = `
+        <!-- Success card -->
+        <div class="card">
+          <div class="tick-wrap" aria-hidden="true">
+            <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <polyline class="tick-path"
+                points="14,27 22,35 38,18"
+                stroke="#1a7f3c"
+                stroke-width="4.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+
+          <h1>Thank you for your application,<br><span>${session.fullName}</span>!</h1>
+
+          <p class="message">
+            Your application was sent successfully.<br>
+            We shall be in contact for further communication via
+            <strong>email</strong> or <strong>SMS</strong>.<br>
+            Please keep an eye on your inbox and messages.
+          </p>
+
+        </div>
+
+        <!-- Submission details -->
+        <div class="details">
+          <div class="details-title">Submission Details</div>
+          <dl>
+            <div class="details-row">
+              <dt>Full Name</dt>
+              <dd>${session.fullName}</dd>
+            </div>
+            <div class="details-row">
+              <dt>Student Number</dt>
+              <dd>${session.studentNumber}</dd>
+            </div>
+            <div class="details-row">
+              <dt>Email Address</dt>
+              <dd>oleratoprimrose61@gmail.com</dd>
+            </div>
+            <div class="details-row">
+              <dt>Submitted On</dt>
+              <dd>${formattedDate} at ${formattedTime}</dd>
+            </div>
+            <div class="details-row">
+              <dt>Status</dt>
+              <dd style="color:var(--green);font-weight:600;">✓ Received &amp; Under Review</dd>
+            </div>
+          </dl>
+        </div>
+
+        <!-- Actions -->
+        <div class="actions">
+          
+          <button class="btn btn-primary" onclick="logout()">Logout</button>
+        </div>`;
+    }
+
+    function logout() {
+      localStorage.removeItem('nwu_session');
+      window.location.href = 'nwu-login.html';
+    }
+  </script>
+
+</body>
+</html>
